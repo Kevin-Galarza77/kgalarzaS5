@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kgalarzaS5.Views.vHome"
+             Title="vHome">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label 
+            Text="GESTION DE PERSONAS" 
+            TextColor="White"
+            FontSize="20"
+            HorizontalOptions="Center" />
+ 
+        <Grid ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+ 
+            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                <Label Text="Nombres" Style="{StaticResource labelStyle}" />
+                <Entry x:Name="nameTxt" Placeholder="Ingrese nombres" />
+            </VerticalStackLayout>
+ 
+            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                <Label Text="Apellidos" Style="{StaticResource labelStyle}" />
+                <Entry x:Name="lastNameTxt" Placeholder="Ingrese apellidos" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Button x:Name="newBTN"
+                Text="Nueva Persona" 
+                TextColor="White"
+                BackgroundColor="Blue"
+                Clicked="Button_Clicked"
+                HorizontalOptions="Center" 
+                Padding="50, 0"
+                />
+
+        <Button x:Name="updateBTN"
+                Text="Actualizar Persona" 
+                TextColor="White"
+                BackgroundColor="Blue"
+                Clicked="updateBTN_Clicked"
+                HorizontalOptions="Center" 
+                Padding="50, 0"
+                IsVisible="False"
+                />
+
+        <Button x:Name="cancelBTN"
+                Text="Cancelar" 
+                TextColor="White"
+                BackgroundColor="Red"
+                Clicked="cancelBTN_Clicked"
+                HorizontalOptions="Center" 
+                Padding="50, 0"
+                IsVisible="False"
+                />
+
+        <CollectionView x:Name="listPersonCV">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/> 
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding personId}"
+                               Grid.Column="0"
+                               VerticalOptions="Center"
+                               />
+
+                        <Label Text="{Binding personName}"
+                               Grid.Column="1"
+                               VerticalOptions="Center"
+                               />
+
+                        <Label Text="{Binding personLastName}"
+                               Grid.Column="2"
+                               VerticalOptions="Center"
+                               />
+
+                        <HorizontalStackLayout Grid.Column="3" Spacing="5">
+                            <Button Text="✏️"
+                                    Clicked="OnUpdateClicked"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Green"
+                                    />
+
+                            <Button Text="🗑️"
+                                    Clicked="OnDeleteClicked"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Red"
+                                    />
+                        </HorizontalStackLayout>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+    </VerticalStackLayout>
+</ContentPage>
